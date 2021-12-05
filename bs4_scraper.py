@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import re
 
 def scrape_site(website,tag):
     r = requests.get(website)
@@ -13,23 +12,25 @@ def scrape_site(website,tag):
     return total_tags
 
 
-def remove_tags(tag_list,tag):
+def remove_tags(tag_list):
     content_list = []
     for tag in tag_list:
+        print(tag)
         back_tag = False
-        for letter in tag:
-            contents = ""
+        contents = ""
+        for letter in str(tag):
+            # print(letter)
             if back_tag == False and letter == ">":
                 back_tag = True
-            if back_tag == True and letter = "<":
+            elif back_tag == True and letter == "<":
                 content_list.append(contents)
                 break
-            if back_tag == True:
-                contents += letter
+            elif back_tag == True:
+                contents += str(letter)
     return content_list
 
 def write_to_file(filename,list):
-    f = open("scraped.txt",'w')
+    f = open(filename,'w+')
     for item in list:
         f.write(str(item) + "\n")
     f.close()
