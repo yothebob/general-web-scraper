@@ -33,4 +33,23 @@ def write_to_file(filename,list):
     f = open(filename,'w+')
     for item in list:
         f.write(str(item) + "\n")
-    f.close()
+    f.close(
+
+def grab_tag_variable(tag_list,variable):
+    content_list = []
+    
+    for tag in tag_list:
+    if variable in str(tag):
+        variable_string = ""
+        variable_index = 0
+        variable_found = False
+        contents = ""
+
+        for letter in str(tag):
+            if letter == variable[variable_index]:
+                variable_string += letter
+                variable_index += 1
+            if variable_string == variable:
+                variable_found = True
+            else:
+                return
